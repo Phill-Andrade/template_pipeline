@@ -68,7 +68,6 @@ Estrutura prevista para o final da primeira etapa:
 │   ├── jobs/
 │   │   └── example.yaml
 │   └── platform.yaml
-├── .env.example
 ├── .gitignore
 └── README.md
 ```
