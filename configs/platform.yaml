@@ -12,6 +12,7 @@ platform:
   runtime:
     hadoop_conf_dir: /opt/hadoop/etc/hadoop
     spark_home: /opt/spark
+    spark_defaults_file: /opt/spark/conf/spark-defaults.conf
     python_executable: /usr/bin/python3
 
   configuration:
@@ -29,4 +30,3 @@ platform:
 
   storage:
     curated_base_path: hdfs:///data/curated
-    spark_event_log_dir: hdfs:///spark-history
