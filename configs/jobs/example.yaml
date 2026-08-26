@@ -1,0 +1,29 @@
+job:
+  name: example
+  description: Validate Spark execution and Hudi integration with the data platform.
+
+spark:
+  driver:
+    memory: 1g
+    cores: 1
+
+  executors:
+    instances: 2
+    memory: 1g
+    cores: 1
+
+  sql:
+    shuffle_partitions: 4
+
+output:
+  format: hudi
+  database: curated
+  table: example
+  path: hdfs:///data/curated/example
+
+  write:
+    operation: upsert
+    table_type: COPY_ON_WRITE
+    record_key: id
+    precombine_field: updated_at
+    partition_field: reference_date
