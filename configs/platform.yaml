@@ -20,7 +20,6 @@ platform:
       - core-site.xml
       - hdfs-site.xml
       - yarn-site.xml
-      - mapred-site.xml
       - hive-site.xml
 
   service_discovery:
