@@ -1,5 +1,6 @@
 job:
   name: example
+  application: src/jobs/example.py
   description: Validate Spark execution and Hudi integration with the data platform.
 
 spark:

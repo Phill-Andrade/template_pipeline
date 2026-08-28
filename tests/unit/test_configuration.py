@@ -16,8 +16,31 @@ def test_loads_example_job() -> None:
     configuration = load_job_configuration(EXAMPLE_JOB_FILE)
 
     assert configuration["job"]["name"] == "example"
+    assert configuration["job"]["application"] == "src/jobs/example.py"
     assert configuration["spark"]["executors"]["instances"] == 2
     assert configuration["output"]["format"] == "hudi"
+
+
+def test_rejects_missing_job_application() -> None:
+    job_data = _load_example_job_data()
+    del job_data["job"]["application"]
+
+    with pytest.raises(
+        ValueError,
+        match="Missing required field 'job.application'",
+    ):
+        _load_temporary_job(job_data)
+
+
+def test_rejects_empty_job_application() -> None:
+    job_data = _load_example_job_data()
+    job_data["job"]["application"] = " "
+
+    with pytest.raises(
+        ValueError,
+        match="Field 'job.application' cannot be empty",
+    ):
+        _load_temporary_job(job_data)
 
 
 def test_rejects_missing_output() -> None:

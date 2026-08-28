@@ -20,6 +20,7 @@ def validate_job_configuration(configuration: dict[str, Any]) -> None:
     _require_mapping(configuration, "output", "output")
 
     _require_string(job, "name", "job.name")
+    _require_string(job, "application", "job.application")
     _validate_spark_configuration(spark)
 
 
