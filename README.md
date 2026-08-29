@@ -105,6 +105,19 @@ main
   → encerra a SparkSession
 ```
 
+### Suporte às camadas Raw, Bronze, Silver e Gold
+
+As camadas representam o estágio dos dados no lakehouse, não módulos ou diretórios do código. Cada pipeline define sua camada de entrada e sua camada de saída, reutilizando as mesmas responsabilidades de extração, transformação, Data Quality e escrita.
+
+| Fluxo | Responsabilidade do pipeline |
+| --- | --- |
+| Fonte → Raw | Extrair os dados da origem e persistir uma representação fiel para rastreabilidade. |
+| Raw → Bronze | Aplicar padronizações técnicas e verificações estruturais antes da escrita. |
+| Bronze → Silver | Limpar, deduplicar e conformar os dados para uso compartilhado. |
+| Silver → Gold | Aplicar regras de negócio e produzir dados orientados ao consumo. |
+
+Uma nova tabela utiliza a mesma estrutura de módulos e define somente suas fontes, regras e destinos específicos. Não serão criados arquivos como `raw.py`, `bronze.py`, `silver.py` ou `gold.py`, porque isso acoplaria a organização do código à camada de armazenamento e duplicaria responsabilidades já existentes.
+
 ### Estratégia de configuração
 
 O template segue code-first:
