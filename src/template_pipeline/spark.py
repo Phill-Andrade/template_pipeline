@@ -1,11 +1,13 @@
-from collections.abc import Iterator
+from collections.abc import Generator
 from contextlib import contextmanager
 
 from pyspark.sql import SparkSession
 
 
 @contextmanager
-def spark_session(application_name: str) -> Iterator[SparkSession]:
+def spark_session(
+    application_name: str,
+) -> Generator[SparkSession, None, None]:
     normalized_name = _require_application_name(application_name)
     session = (
         SparkSession.builder
