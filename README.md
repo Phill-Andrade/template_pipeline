@@ -2,7 +2,7 @@
 
 Template code-first para engenheiros de dados criarem pipelines PySpark independentes, executados no YARN da plataforma e orquestrados pelo Airflow.
 
-> Status: estrutura code-first em construção. Os módulos serão adicionados somente quando tiverem comportamento implementado e testável.
+> Status: estrutura code-first em construção. O ciclo de vida da `SparkSession` está implementado; os demais módulos serão adicionados com comportamento testável.
 
 ---
 
@@ -46,7 +46,13 @@ Ainda não existe uma aplicação executável. O comando será documentado após
 
 ### Testes
 
-Ainda não existe framework ou comando de testes configurado. A ferramenta será adicionada com o primeiro módulo que possuir comportamento testável.
+Os testes unitários usam `pytest` e mocks para não iniciar uma sessão Spark real:
+
+```bash
+poetry run pytest -s
+```
+
+A suíte atual valida criação, normalização do nome, encerramento e falhas do ciclo de vida da `SparkSession`.
 
 ---
 
@@ -206,7 +212,7 @@ Não serão criados módulos genéricos como `utils.py`, `helpers.py`, fábricas
 - Tell, Don't Ask na coordenação entre responsabilidades.
 - Bibliotecas maduras preferidas quando reduzirem a complexidade total.
 - Abstrações adicionadas somente após uma necessidade concreta.
-- Testes: ainda não configurados.
+- Testes: `pytest`.
 - Linter: ainda não configurado.
 - Política de cobertura: ainda não definida.
 
